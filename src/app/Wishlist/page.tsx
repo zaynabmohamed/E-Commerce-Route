@@ -72,70 +72,124 @@ export default function Wishlist() {
     }
    
   return (
-     <>
-         {products?.length > 0 ? (
-             <div className="container mx-auto w-2/3 mt-12">
-                <h2 className="text-red-800 font-bold text-3xl mb-4 p-3">My Wishlist </h2>
-               <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
-                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                   <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                     <tr>
-                       <th scope="col" className="px-6 py-3">
-                         Image
-                       </th>
-                       <th scope="col" className="px-6 py-3">
-                         Product
-                       </th>
-                       <th scope="col" className="px-6 py-3">
-                         Qty
-                       </th>
-                       <th scope="col" className="px-6 py-3">
-                         Price
-                       </th>
-                       <th scope="col" className="px-6 py-3">
-                         Action
-                       </th>
-                     </tr>
-                   </thead>
-                   <tbody>
-                     {products?.map((data:Daum) => (
-                       <tr
-                         key={data._id }
-                         className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
-                       >
-                         <td className="p-4">
-                           <Image
-                             width={500}
-                             height={500}
-                             src={data.imageCover}
-                             className="w-16 md:w-32 max-w-full max-h-full"
-                             alt="Apple Watch"
-                           />
-                         </td>
-                         <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                           {data.title}
-                         </td>
-                         <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                           {data.quantity} 
-                         </td>
-                         <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                           {data.price} EGP
-                         </td>
-                         <td className="px-6 py-4 my-16 flex justify-around items-center">
-                         <Button> <ButtonAddToCart id={data.id}/> </Button>
-                         <Button disabled={isremove} onClick={()=>remove(data.id)} className="text-2xl cursor-pointer"><MdDeleteForever/></Button>
-                         </td>
-                       </tr>
-                     ))}
-                   </tbody>
-                 </table>
-               </div>
-             </div>
-           ) : (
-             <h1 className="text-center text-3xl text-red-500 font-bold my-12" >
-              Empty My Wishlist ... <Link href='/Products'>Go to the page Products</Link>
-             </h1>
-           )}
+    <>
+      {products?.length > 0 ? (
+        <div className="w-full px-3 sm:px-4 py-6 sm:py-8">
+          <div className="w-full max-w-7xl mx-auto">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl text-red-600 font-bold mb-8">
+              My Wishlist
+            </h1>
+
+            {/* Mobile View */}
+            <div className="md:hidden space-y-4 mb-6">
+              {products?.map((data:Daum) => (
+                <div
+                  key={data._id}
+                  className="bg-white rounded-lg shadow p-4 border"
+                >
+                  <div className="flex gap-4 mb-4">
+                    <Image
+                      width={300}
+                      height={300}
+                      src={data.imageCover}
+                      className="w-20 h-20 object-contain rounded"
+                      alt={data.title}
+                    />
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold text-gray-900 text-sm truncate">
+                        {data.title}
+                      </p>
+                      <p className="text-red-600 font-bold text-lg mt-1">
+                        {data.price} EGP
+                      </p>
+                      <p className="text-gray-600 text-xs mt-1">
+                        Qty: {data.quantity}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2">
+                    <Button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm">
+                      <ButtonAddToCart id={data.id}/>
+                    </Button>
+                    <Button 
+                      disabled={isremove} 
+                      onClick={()=>remove(data.id)}
+                      className="bg-red-600 hover:bg-red-700 text-white text-lg"
+                    >
+                      <MdDeleteForever/>
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop Table */}
+            <div className="hidden md:block overflow-x-auto shadow-md rounded-lg">
+              <table className="w-full text-sm text-left text-gray-600">
+                <thead className="bg-gray-100 border-b">
+                  <tr>
+                    <th className="px-4 py-3 font-semibold">Image</th>
+                    <th className="px-4 py-3 font-semibold">Product</th>
+                    <th className="px-4 py-3 font-semibold">Quantity</th>
+                    <th className="px-4 py-3 font-semibold">Price</th>
+                    <th className="px-4 py-3 font-semibold">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {products?.map((data:Daum) => (
+                    <tr key={data._id} className="border-b hover:bg-gray-50">
+                      <td className="px-4 py-4">
+                        <Image
+                          width={500}
+                          height={500}
+                          src={data.imageCover}
+                          className="w-16 h-16 object-contain"
+                          alt={data.title}
+                        />
+                      </td>
+                      <td className="px-4 py-4 font-semibold text-gray-900">
+                        {data.title}
+                      </td>
+                      <td className="px-4 py-4 font-semibold">
+                        {data.quantity}
+                      </td>
+                      <td className="px-4 py-4 font-semibold text-red-600">
+                        {data.price} EGP
+                      </td>
+                      <td className="px-4 py-4">
+                        <div className="flex gap-2">
+                          <Button className="bg-blue-600 hover:bg-blue-700 text-white text-sm py-1">
+                            <ButtonAddToCart id={data.id}/>
+                          </Button>
+                          <Button 
+                            disabled={isremove} 
+                            onClick={()=>remove(data.id)}
+                            className="bg-red-600 hover:bg-red-700 text-white text-lg"
+                          >
+                            <MdDeleteForever/>
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="w-full min-h-screen flex items-center justify-center">
+          <div className="text-center px-4">
+            <h1 className="text-2xl sm:text-3xl text-red-500 font-bold mb-4">
+              Your Wishlist is Empty!
+            </h1>
+            <Link href='/Products' className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
+              Continue Shopping
+            </Link>
+          </div>
+        </div>
+      )}
     </>
-)
+  )
 }

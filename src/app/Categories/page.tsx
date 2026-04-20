@@ -10,21 +10,36 @@ export const metadata: Metadata = {
 export default async function Categories() {
   const data = await getAllCategory();
   console.log(data)
+  
   return (
-    <div className="gap-2 my-12 w-2/3 mx-auto grid grid-cols-2 lg:grid-cols-4 sm:grid-cols-3 ">
-      {data.map((product : CategoryTpe)=>(
-        <div key={product._id}>
-          <div>
-          <div className='w-[80%] justify-center border-4 rounded-3xl'>
-        <Image width={500} height={500} src={product.image} alt={product.name} className='rounded-3xl p-2'/>
-        <div className=' p-3 text-center text-2xl'>
-             {product.name}
-           </div>
+    <div className="w-full px-3 sm:px-4 py-6 sm:py-8">
+      <div className="w-full max-w-7xl mx-auto">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mb-8 text-center">
+          Product Categories
+        </h1>
+        <div className="grid gap-3 sm:gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {data.map((product: CategoryTpe) => (
+            <div key={product._id} className="overflow-hidden rounded-lg border border-gray-200 shadow-md hover:shadow-lg transition">
+              <div className="flex flex-col h-full bg-white">
+                <div className="overflow-hidden">
+                  <Image
+                    width={500}
+                    height={500}
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-40 sm:h-48 object-contain rounded-t-lg"
+                  />
+                </div>
+                <div className="p-3 sm:p-4 text-center flex-1 flex items-center justify-center">
+                  <p className="text-sm sm:text-base md:text-lg font-semibold text-gray-800 truncate px-2">
+                    {product.name}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-           </div>
-           </div>
-      ))}
-     
+      </div>
     </div>
   )
 }

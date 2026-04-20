@@ -33,53 +33,83 @@ export default function Checkout() {
   }
   return (
     <>
-    <div className='w-[80%] mx-auto my-12 p-4  sm:grid-cols-2  gap-6'>
-    <h1 className='text-center font-bold text-3xl my-4'> checkout Now</h1>
-    <Form {...form} >
- <form onSubmit={form.handleSubmit(handleCheckout)}>
-    <FormField
-    control={form.control}
-    name="details"
-    render={({field}) => (
-      <FormItem>
-        <FormLabel> Details:</FormLabel>
-        <FormControl>
-          <Input {...field}  type='text'/>
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    )}
-  />
-  <FormField
-    control={form.control}
-    name="phone"
-    render={({field}) => (
-      <FormItem>
-        <FormLabel> phone:</FormLabel>
-        <FormControl>
-          <Input {...field}  type='tel'/>
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    )}
-  />
-  <FormField
-    control={form.control}
-    name="city"
-    render={({field}) => (
-      <FormItem>
-        <FormLabel> City:</FormLabel>
-        <FormControl>
-          <Input {...field}  type='text'/>
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    )}
-  />
-<Button className='cursor-pointer w-full mt-4'>{isLoading ? <><span className="loading"></span></> : "Pay Now"}</Button>
- </form>
-</Form>
-    </div>
+      <div className='w-full px-4 sm:px-6 py-8 sm:py-12 min-h-screen flex items-center justify-center'>
+        <div className='w-full max-w-md'>
+          <h1 className='text-center font-bold text-2xl sm:text-3xl md:text-4xl mb-6 sm:mb-8 text-blue-900'>
+            Shipping Details
+          </h1>
+          
+          <Form {...form} >
+            <form onSubmit={form.handleSubmit(handleCheckout)} className='space-y-4 sm:space-y-6'>
+              
+              <FormField
+                control={form.control}
+                name="details"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel className='text-sm sm:text-base'>Address Details</FormLabel>
+                    <FormControl>
+                      <Input 
+                        {...field}  
+                        type='text'
+                        placeholder='Street address, apartment, etc.'
+                        className='py-2 sm:py-3 text-sm sm:text-base'
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel className='text-sm sm:text-base'>Phone Number</FormLabel>
+                    <FormControl>
+                      <Input 
+                        {...field}  
+                        type='tel'
+                        placeholder='+1 (555) 123-4567'
+                        className='py-2 sm:py-3 text-sm sm:text-base'
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="city"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel className='text-sm sm:text-base'>City</FormLabel>
+                    <FormControl>
+                      <Input 
+                        {...field}  
+                        type='text'
+                        placeholder='Your city'
+                        className='py-2 sm:py-3 text-sm sm:text-base'
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <Button 
+                className='cursor-pointer w-full mt-6 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 sm:py-3 text-base sm:text-lg rounded-lg transition'
+                disabled={isLoading}
+              >
+                {isLoading ? "Processing..." : "Proceed to Payment"}
+              </Button>
+
+            </form>
+          </Form>
+        </div>
+      </div>
     </>
   )
 }

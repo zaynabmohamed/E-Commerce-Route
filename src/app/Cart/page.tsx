@@ -22,7 +22,7 @@ export default function Cart() {
    const [total , setTotal]  = useState(0);
   // {fun Add Products in cart }
   async function getUser() {
-            setIsLoading(true);
+     setIsLoading(true);
     try {
       const res = await getCart();
         setIsLoading(false);
@@ -124,124 +124,169 @@ export default function Cart() {
   return (
     <>
       {products?.length > 0 ? (
-        <div className="container mx-auto w-[80%] mt-12">
-          <div className=' flex justify-end'>
-        <Button className='cursor-pointer my-4 bg-red-500 hover:bg-red-700' onClick={()=>Clear()}>Clean Cart</Button> 
-          </div>
-          <h2 className="relative text-3xl font-bold text-blue-950 p-2 ">Total Price : {total}</h2>
-          <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                  <th scope="col" className="px-16 py-3">
-                    Image
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Product
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Qty
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Price
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Action
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((product:CartProduct) => (
-                  <tr
-                    key={product._id}
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
-                  >
-                    <td className="p-4">
-                      <Image
-                        width={500}
-                        height={500}
-                        src={product.product.imageCover}
-                        className="w-16 md:w-32 max-w-full max-h-full"
-                        alt="Apple Watch"
-                      />
-                    </td>
-                    <td className="px-2 py-4 font-semibold text-gray-900 dark:text-white">
-                      {product.product.title}
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center">
-                        <button disabled={isUpdata} onClick={()=>Updata(product.product.id , String(product.count - 1) , " - ")}
-                          className="disabled:bg-slate-300  inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                          type="button"
-                        >
-                          <span className="sr-only">Quantity button</span>
-                          <svg
-                            className="w-3 h-3"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 18 2"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M1 1h16"
-                            />
-                          </svg>
-                        </button>
-                        <div>
-                          {product.product.id === currentId ?(LoadingUpdata ? <div className="load"></div> : <span>{product.count}</span>) :  <span>{product.count}</span>}
-                        </div>
-                        <button disabled={isUpdata}  onClick={()=>Updata(product.product.id , String(product.count + 1) , " + " )}
-                          className="disabled:bg-slate-600 inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                          type="button"
-                        >
-                          <span className="sr-only">Quantity button</span>
-                          <svg
-                            className="w-3 h-3"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 18 18"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M9 1v16M1 9h16"
-                            />
-                          </svg>
-                        </button>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                      {product.price * product.count} EGP
-                    </td>
-                    <td className="px-6 py-4">
-                      <button
-                        disabled={isremove}
-                        onClick={() => remove(product.product.id)}
-                        className="font-medium text-red-600 dark:text-red-500 cursor-pointer disabled:bg-slate-900 disabled:p-2 disabled:rounded-2xl disabled:text-white"
+        <div className="w-full px-3 sm:px-4 py-6 sm:py-8">
+          <div className="w-full max-w-7xl mx-auto">
+            {/* Header */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-950">
+                Shopping Cart
+              </h1>
+              <Button 
+                className='cursor-pointer bg-red-500 hover:bg-red-700 text-white px-4 sm:px-6 py-2 text-sm sm:text-base' 
+                onClick={()=>Clear()}
+              >
+                Clear Cart
+              </Button>
+            </div>
+
+            {/* Total Price */}
+            <div className="bg-blue-50 p-4 sm:p-6 rounded-lg mb-6 border-l-4 border-blue-600">
+              <p className="text-lg sm:text-2xl font-bold text-blue-950">
+                Total Price: <span className="text-red-600">{total} EGP</span>
+              </p>
+            </div>
+
+            {/* Mobile View */}
+            <div className="md:hidden space-y-4 mb-6">
+              {products.map((product:CartProduct) => (
+                <div
+                  key={product._id}
+                  className="bg-white rounded-lg shadow p-4 border"
+                >
+                  <div className="flex gap-4 mb-4">
+                    <Image
+                      width={300}
+                      height={300}
+                      src={product.product.imageCover}
+                      className="w-20 h-20 object-contain rounded"
+                      alt={product.product.title}
+                    />
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold text-gray-900 text-sm truncate">
+                        {product.product.title}
+                      </p>
+                      <p className="text-red-600 font-bold text-lg">
+                        {product.price * product.count} EGP
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Quantity Controls */}
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-gray-700 font-semibold">Qty:</span>
+                    <div className="flex items-center gap-2 border rounded-lg p-1">
+                      <button 
+                        disabled={isUpdata} 
+                        onClick={()=>Updata(product.product.id , String(product.count - 1) , " - ")}
+                        className="disabled:opacity-50 w-6 h-6 flex items-center justify-center hover:bg-gray-100 rounded"
                       >
-                        Remove
+                        −
                       </button>
-                    </td>
-                   
+                      <span className="w-6 text-center font-semibold">
+                        {product.product.id === currentId ? (LoadingUpdata ? "..." : product.count) : product.count}
+                      </span>
+                      <button 
+                        disabled={isUpdata}  
+                        onClick={()=>Updata(product.product.id , String(product.count + 1) , " + " )}
+                        className="disabled:opacity-50 w-6 h-6 flex items-center justify-center hover:bg-gray-100 rounded"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Remove Button */}
+                  <button
+                    disabled={isremove}
+                    onClick={() => remove(product.product.id)}
+                    className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 disabled:opacity-50 font-semibold text-sm"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop Table */}
+            <div className="hidden md:block overflow-x-auto shadow-md rounded-lg mb-6">
+              <table className="w-full text-sm text-left text-gray-600">
+                <thead className="bg-gray-100 border-b">
+                  <tr>
+                    <th className="px-4 py-3 font-semibold">Image</th>
+                    <th className="px-4 py-3 font-semibold">Product</th>
+                    <th className="px-4 py-3 font-semibold">Quantity</th>
+                    <th className="px-4 py-3 font-semibold">Price</th>
+                    <th className="px-4 py-3 font-semibold">Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {products.map((product:CartProduct) => (
+                    <tr key={product._id} className="border-b hover:bg-gray-50">
+                      <td className="px-4 py-4">
+                        <Image
+                          width={500}
+                          height={500}
+                          src={product.product.imageCover}
+                          className="w-16 h-16 object-contain"
+                          alt={product.product.title}
+                        />
+                      </td>
+                      <td className="px-4 py-4 font-semibold text-gray-900">
+                        {product.product.title}
+                      </td>
+                      <td className="px-4 py-4">
+                        <div className="flex items-center gap-2 border rounded-lg p-1 w-fit">
+                          <button 
+                            disabled={isUpdata} 
+                            onClick={()=>Updata(product.product.id , String(product.count - 1) , " - ")}
+                            className="disabled:opacity-50 w-6 h-6 flex items-center justify-center hover:bg-gray-100 rounded"
+                          >
+                            −
+                          </button>
+                          <span className="w-6 text-center font-semibold">
+                            {product.product.id === currentId ? (LoadingUpdata ? "..." : product.count) : product.count}
+                          </span>
+                          <button 
+                            disabled={isUpdata}  
+                            onClick={()=>Updata(product.product.id , String(product.count + 1) , " + " )}
+                            className="disabled:opacity-50 w-6 h-6 flex items-center justify-center hover:bg-gray-100 rounded"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </td>
+                      <td className="px-4 py-4 font-semibold text-red-600">
+                        {product.price * product.count} EGP
+                      </td>
+                      <td className="px-4 py-4">
+                        <button
+                          disabled={isremove}
+                          onClick={() => remove(product.product.id)}
+                          className="text-red-600 hover:text-red-800 font-semibold disabled:opacity-50"
+                        >
+                          Remove
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Checkout Button */}
+            <Link href={`/Checkout/${cartId}`}>
+              <Button className="w-full bg-blue-700 hover:bg-blue-800 text-white py-3 text-lg font-semibold rounded-lg">
+                {isLoading ? "Processing..." : "Checkout Now"}
+              </Button>
+            </Link>
           </div>
-         <Link href={`/Checkout/${cartId}`}> <Button className="bg-blue-700 w-full text-2xl p-6 text-white cursor-pointer my-4">{isLoading ? <><span className="loading"></span></> : " Checkout Now"}</Button></Link>
         </div>
       ) : (
-        <h1 className="text-center text-3xl text-red-500 font-bold my-12">
-          {" "}
-          No Products Added yet!{" "}
-        </h1>
+        <div className="w-full min-h-screen flex items-center justify-center">
+          <h1 className="text-2xl sm:text-3xl text-red-500 font-bold text-center px-4">
+            No Products Added yet!
+          </h1>
+        </div>
       )}
     </>
   );

@@ -6,6 +6,7 @@
     rePassword:z.string().nonempty('the field is required'),
     phone:z.string().regex(/^01[0125][0-9]{8}$/, "the phone is not vaild")
  })
+ 
  .refine((object)=>object.password=== object.rePassword,{
     path:['rePassword'],
     error:"the password and rePassword is not match !!"

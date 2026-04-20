@@ -9,11 +9,13 @@ export const metadata: Metadata = {
 };
 export default function Home() {
   return (
-    <div className="mx-auto w-[80%] my-10">
-      <MainSlider/>
-      <Category/>
-      <LimtBrands/>
-      <LimtProducts/>
+    <div className="w-full px-3 sm:px-4">
+      <div className="mx-auto w-full max-w-7xl py-6 sm:py-8 md:py-10 space-y-8 sm:space-y-10">
+        <MainSlider />
+        <Category />
+        <LimtBrands />
+        <LimtProducts />
+      </div>
     </div>
   )
 }

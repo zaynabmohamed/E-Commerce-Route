@@ -16,23 +16,30 @@ export default async function Brands() {
   console.log(data);
   
   return (
-      <div className="gap-2 w-[80%] mx-auto grid grid-cols-2 lg:grid-cols-4 sm:grid-cols-3  shadow-3xl">
-        {data.map((product :Daum) => (
-          <div key={product._id}>
-              <div className="p-4 gap-3 ">
-                  <Image
-                    width={500}
-                    height={500}
-                    src={product.image}
-                    alt={product.name}
-                  />
-                  <div className='flex justify-center p-2 bg-black text-white '>
+    <div className="w-full px-3 sm:px-4 py-6 sm:py-8">
+      <div className="w-full max-w-7xl mx-auto">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mb-8 text-center">
+          Our Brands
+        </h1>
+        <div className="grid gap-3 sm:gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {data.map((product: Daum) => (
+            <div key={product._id} className="overflow-hidden rounded-lg border border-gray-200 shadow-md hover:shadow-lg transition">
+              <div className="p-3 sm:p-4 bg-white">
+                <Image
+                  width={500}
+                  height={500}
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-40 sm:h-48 object-contain rounded-lg mb-3"
+                />
+                <div className="flex justify-center p-2 sm:p-3 bg-black text-white text-center text-xs sm:text-sm font-bold rounded-lg truncate">
                   {product.name}
-                  </div>
+                </div>
               </div>
-          </div>
-        ))}
+            </div>
+          ))}
+        </div>
       </div>
-          
+    </div>
   )
 }
