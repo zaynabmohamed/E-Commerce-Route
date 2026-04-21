@@ -23,7 +23,7 @@ const router = useRouter()
     },
     resolver:zodResolver(Schema)
   })
-  //{ Call Api (register) } 
+  //{ Call Api (registher) } 
  async function handleRegister(value : registertype){
   setIsLoading(true)
   console.log(value)
@@ -31,7 +31,7 @@ const router = useRouter()
   const res =await  axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signup` , value)
   setIsLoading(false)
    if(res.data.message === "success"){
-        toast.success("you register success", {position: "top-center" , duration:10000})
+        toast.success("you register success", {position: "top-center" , duration:1000})
     router.push('/Login')
    }
   }catch(err){
@@ -41,79 +41,128 @@ const router = useRouter()
   }
   return (
     <>
-    <div className='w-1/3 mx-auto my-12 '>
-    <h1 className='text-center font-bold text-3xl my-4'>Registe Now </h1>
-    <Form {...form}>
- <form onSubmit={form.handleSubmit(handleRegister)}>
-   <FormField
-    control={form.control}
-    name="name"
-    render={({field}) => (
-      <FormItem>
-        <FormLabel> Name:</FormLabel>
-        <FormControl>
-          <Input {...field}   type='text'/>
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    )}
-  />
-    <FormField
-    control={form.control}
-    name="email"
-    render={({field}) => (
-      <FormItem>
-        <FormLabel> Email:</FormLabel>
-        <FormControl>
-          <Input {...field}  type='email'/>
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    )}
-  />
-  <FormField
-    control={form.control}
-    name="password"
-    render={({field}) => (
-      <FormItem>
-        <FormLabel> Password:</FormLabel>
-        <FormControl>
-          <Input {...field}  type='password'/>
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    )}
-  />
-    <FormField
-    control={form.control}
-    name="rePassword"
-    render={({field}) => (
-      <FormItem>
-        <FormLabel>rePassword:</FormLabel>
-        <FormControl>
-          <Input {...field}  type='password'/>
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    )}
-  />
-    <FormField 
-    control={form.control}
-    name="phone"
-    render={({field}) => (
-      <FormItem>
-        <FormLabel> phone:</FormLabel>
-        <FormControl>
-          <Input {...field} type='tel'/>
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    )}
-  />
-<Button className='cursor-pointer w-full mt-4'>{isLoading ? <span className='loading'></span> : "Register Now "} </Button>
- </form>
-</Form>
-    </div>
+      <div className='w-full px-4 sm:px-6 py-8 sm:py-12 min-h-screen flex items-center justify-center'>
+        <div className='w-full max-w-md'>
+          <h1 className='text-center font-bold text-2xl sm:text-3xl md:text-4xl mb-6 sm:mb-8 text-blue-900'>
+            Create Account
+          </h1>
+          
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(handleRegister)} className='space-y-4 sm:space-y-5'>
+              
+              <FormField
+                control={form.control}
+                name="name"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel className='text-sm sm:text-base'>Full Name</FormLabel>
+                    <FormControl>
+                      <Input 
+                        {...field}   
+                        type='text'
+                        placeholder='John Doe'
+                        className='py-2 sm:py-3 text-sm sm:text-base'
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="email"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel className='text-sm sm:text-base'>Email Address</FormLabel>
+                    <FormControl>
+                      <Input 
+                        {...field}  
+                        type='email'
+                        placeholder='your@email.com'
+                        className='py-2 sm:py-3 text-sm sm:text-base'
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="password"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel className='text-sm sm:text-base'>Password</FormLabel>
+                    <FormControl>
+                      <Input 
+                        {...field}  
+                        type='password'
+                        placeholder='••••••••'
+                        className='py-2 sm:py-3 text-sm sm:text-base'
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="rePassword"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel className='text-sm sm:text-base'>Confirm Password</FormLabel>
+                    <FormControl>
+                      <Input 
+                        {...field}  
+                        type='password'
+                        placeholder='••••••••'
+                        className='py-2 sm:py-3 text-sm sm:text-base'
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField 
+                control={form.control}
+                name="phone"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel className='text-sm sm:text-base'>Phone Number</FormLabel>
+                    <FormControl>
+                      <Input 
+                        {...field} 
+                        type='tel'
+                        placeholder='+1 (555) 123-4567'
+                        className='py-2 sm:py-3 text-sm sm:text-base'
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <Button 
+                className='cursor-pointer w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 sm:py-3 text-base sm:text-lg rounded-lg transition'
+                disabled={isLoading}
+              >
+                {isLoading ? "Creating account..." : "Register Now"} 
+              </Button>
+
+            </form>
+          </Form>
+
+          <p className='text-center text-xs sm:text-sm text-gray-600 mt-4'>
+            Already have an account? 
+            <a href='/Login' className='text-blue-600 hover:underline font-semibold ml-1'>
+              Login here
+            </a>
+          </p>
+        </div>
+      </div>
     </>
   )
 }

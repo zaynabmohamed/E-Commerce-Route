@@ -30,23 +30,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        
-       <MySessionProvider>
-        <CartContextProvider>
-        <WishlistContextProvider>
-         <Navbar/>
-        {children}
-         <Toaster />
-        
-        </WishlistContextProvider>
-        </CartContextProvider>
-       </MySessionProvider>
-         <div className="bg-gray-800 text-white text-center p-4 mt-[20%] ">
-        <Footer/>
-      </div>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}>
+        <div className="min-h-screen flex flex-col">
+          <MySessionProvider>
+            <CartContextProvider>
+              <WishlistContextProvider>
+                <Navbar />
+                <main className="flex-1">{children}</main>
+                <Toaster />
+                <Footer />
+              </WishlistContextProvider>
+            </CartContextProvider>
+          </MySessionProvider>
+        </div>
       </body>
     </html>
   );

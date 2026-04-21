@@ -1,77 +1,102 @@
 
 "use client";
 import Link from "next/link";
+
 export default function Footer() {
   return (
-    <footer>
-      {/* 🧭 الروابط المقسمة إلى أعمدة */}
-      <div className="px-4 py-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 ">
-        {/* 📌 العمود 1 */}
-        <div>
-          <h3 className="font-bold mb-3">الإلكترونيات</h3>
-          <ul className="space-y-2 text-sm">
-            <li><Link href="#">الهواتف المتحركة</Link></li>
-            <li><Link href="#">أجهزة التابلت</Link></li>
-            <li><Link href="#">الكمبيوتر</Link></li>
-            <li><Link href="#">الأجهزة المنزلية</Link></li>
-            <li><Link href="#">الكاميرات</Link></li>
-          </ul>
-        </div>
-        {/* 📌 العمود 2 */}
-        <div>
-          <h3 className="font-bold mb-3">الأزياء</h3>
-          <ul className="space-y-2 text-sm">
-            <li><Link href="#">أزياء نسائية</Link></li>
-            <li><Link href="#">أزياء رجالية</Link></li>
-            <li><Link href="#">أزياء البنات</Link></li>
-            <li><Link href="#">أزياء الأولاد</Link></li>
-            <li><Link href="#">النظارات</Link></li>
-          </ul>
-        </div>
-        {/* 📌 العمود 3 */}
-        <div>
-          <h3 className="font-bold mb-3">المطبخ والأجهزة المنزلية</h3>
-          <ul className="space-y-2 text-sm">
-            <li><Link href="#">أدوات المطبخ</Link></li>
-            <li><Link href="#">مستلزمات الحمام</Link></li>
-            <li><Link href="#">ديكور المنزل</Link></li>
-            <li><Link href="#">الأجهزة الصغيرة</Link></li>
-            <li><Link href="#">تنظيم المنزل</Link></li>
-          </ul>
-        </div>
-        {/* 📌 العمود 4 */}
-        <div>
-          <h3 className="font-bold mb-3">الجمال</h3>
-          <ul className="space-y-2 text-sm">
-            <li><Link href="#">العطور النسائية</Link></li>
-            <li><Link href="#">عطور الرجال</Link></li>
-            <li><Link href="#">العناية بالبشرة</Link></li>
-            <li><Link href="#">العناية بالشعر</Link></li>
-            <li><Link href="#">الإكسسوارات</Link></li>
-          </ul>
-        </div>
-        {/* 📌 العمود 5 */}
-        <div>
-          <h3 className="font-bold mb-3">الأطفال والرضع</h3>
-          <ul className="space-y-2 text-sm">
-            <li><Link href="#">عربات الأطفال</Link></li>
-            <li><Link href="#">مقاعد السيارات</Link></li>
-            <li><Link href="#">ملابس الأطفال</Link></li>
-            <li><Link href="#">الألعاب</Link></li>
-            <li><Link href="#">الرضاعة</Link></li>
-          </ul>
-        </div>
+    <footer className="bg-gray-900 text-gray-100 mt-12">
+      <div className="px-4 sm:px-6 py-8 sm:py-12">
+        <div className="max-w-7xl mx-auto">
+          {/* Footer Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 mb-8">
+            {/* Column 1 */}
+            <div>
+              <h3 className="font-bold mb-3 text-sm sm:text-base text-white">Electronics</h3>
+              <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm">
+                <li><Link href="#" className="hover:text-blue-400 transition">Mobile Phones</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Tablets</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Computers</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Home Appliances</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Cameras</Link></li>
+              </ul>
+            </div>
 
-        {/* 📌 العمود 6 */}
-        <div>
-          <h3 className="font-bold mb-3">أفضل الماركات</h3>
-          <ul className="space-y-2 text-sm">
-            <li><Link href="#">أبل</Link></li>
-            <li><Link href="#">سامسونج</Link></li>
-            <li><Link href="#">نايك</Link></li>
-            <li><Link href="#">راي بان</Link></li>
-            <li><Link href="#">شيكو</Link></li>
-          </ul>
+            {/* Column 2 */}
+            <div>
+              <h3 className="font-bold mb-3 text-sm sm:text-base text-white">Fashion</h3>
+              <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm">
+                <li><Link href="#" className="hover:text-blue-400 transition">Women's Fashion</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Men's Fashion</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Girls' Fashion</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Boys' Fashion</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Sunglasses</Link></li>
+              </ul>
+            </div>
+
+            {/* Column 3 */}
+            <div>
+              <h3 className="font-bold mb-3 text-sm sm:text-base text-white">Home & Kitchen</h3>
+              <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm">
+                <li><Link href="#" className="hover:text-blue-400 transition">Kitchen Tools</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Bath Items</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Home Decor</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Small Appliances</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Organization</Link></li>
+              </ul>
+            </div>
+
+            {/* Column 4 */}
+            <div>
+              <h3 className="font-bold mb-3 text-sm sm:text-base text-white">Beauty</h3>
+              <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm">
+                <li><Link href="#" className="hover:text-blue-400 transition">Women's Perfume</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Men's Perfume</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Skincare</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Hair Care</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Accessories</Link></li>
+              </ul>
+            </div>
+
+            {/* Column 5 */}
+            <div>
+              <h3 className="font-bold mb-3 text-sm sm:text-base text-white">Kids & Baby</h3>
+              <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm">
+                <li><Link href="#" className="hover:text-blue-400 transition">Strollers</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Car Seats</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Kids Clothes</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Toys</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Baby Feeding</Link></li>
+              </ul>
+            </div>
+
+            {/* Column 6 */}
+            <div>
+              <h3 className="font-bold mb-3 text-sm sm:text-base text-white">Top Brands</h3>
+              <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm">
+                <li><Link href="#" className="hover:text-blue-400 transition">Apple</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Samsung</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Nike</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Ray Ban</Link></li>
+                <li><Link href="#" className="hover:text-blue-400 transition">Chicco</Link></li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="border-t border-gray-700 py-6 sm:py-8">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+              <p className="text-xs sm:text-sm text-gray-400 text-center sm:text-left">
+                © 2024 Smart Tech Store. All rights reserved.
+              </p>
+              <div className="flex gap-4 text-xs sm:text-sm">
+                <Link href="#" className="hover:text-blue-400 transition">Privacy Policy</Link>
+                <span className="text-gray-600">|</span>
+                <Link href="#" className="hover:text-blue-400 transition">Terms & Conditions</Link>
+                <span className="text-gray-600">|</span>
+                <Link href="#" className="hover:text-blue-400 transition">Contact Us</Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

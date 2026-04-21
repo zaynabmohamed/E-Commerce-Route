@@ -13,83 +13,109 @@ export default async function  ProductDetails({params } : {params :Promise< {id:
   //{================Api ProductDetails============}
   const response = await fetch(`https://ecommerce.routemisr.com/api/v1/products/${id}`)
    const data = await response.json()
-  //  console.log(data)
-  //  if(!data) return <h1>No Products Here !!</h1>
-  //  const RelatedProducts = await getRelated(CategoryTpe._id)
-  //  console.log(RelatedProducts)
-   // data.category._id ===> category id ===> current product
+  
   return (
-    <div className='conatiner mx-auto px-4 py-8 w-[80%]'> 
-    <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
-       <div className='space-y-4 w-[80%]'>
-        <div className=' relative aspect-square overflow-hidden rounded-lg border'>
-       <Image width={500} height={500} src={data.data.imageCover}alt='image the product' className='object-contain ' />
-        </div>
-    {/*========== Thumbnail Image ==========*/}
-          <Buttonproductimage images={data.data.images} title={data.data.title} />
-       </div>
-    {/*========== product Info ==========*/}
-    <div className='space-y-6'>
-      {/*========== Brand ==========*/}
-      <div className='text-sm text-muted-foreground uppercase tracking-wide'>
-        <Link href='' className='hover:text-primary hover:underline transition-colors'>
-        {data.data.brand.name}
-        </Link>
-      </div>
-      {/*========== Title ==========*/}
-      <h1 className='text-3xl font-bold'>{data.data.title}</h1>
-      {/*========== Rating ==========*/}
-      <div className='flex items-center gap-4'>
-        <div className='flex items-center gap-1'>
-          <span className='ml-2 text-sm text-muted-foreground flex gap-2'>
-            <i className="text-yellow-300 my-1"><IoStarSharp /></i>
-            <i className="text-yellow-300 my-1"><IoStarSharp /></i>
-            <i className="text-yellow-300 my-1"><IoStarSharp /></i>
-            <i className="text-yellow-300 my-1"><IoStarSharp /></i>
-            <i className="text-yellow-300 my-1"><IoStarSharp /></i>
-            {data.data.ratingsAverage}({data.data.ratingsQuantity} reviews)
-          </span>
-        </div>
-        <span className='text-sm text-muted-foreground'>{data.data.sold}</span>
-      </div>
-      {/*========== price ==========*/}
-      <div className='text-3xl font-bold text-primary'>
-       ${data.data.price}
-      </div>
-   {/*========== Description========== */}
-   <div className='space-y-2'>
-    <h3 className='font-semibold'>Description</h3>
-    <p className='text-muted-foreground leading-relaxed'>{data.data.description}</p>
-   </div>
-   {/* ========== Category ========== 
-   {/* <div className='flex flex-wrap gap-2'>
-   <Link href={``} className='px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm hover:bg-secondary'>{data.data.category}</Link> 
-   </div>  */}
-   {/* Stock Status */}
-   <div className='flex items-center gap-2'>
-    <span className='text-sm font-medium'>Stock:</span>
-    <span className={`text-sm ${data.data.quantity >0 ? "text-green-600" : " text-red-500"}`}>{data.data.quantity > 0 ? `${data.data.quantity} available` : "out of Stock"}</span>
-   </div>
-   {/*============== Action Buttons ==========*/}
-   <div className='flex gap-4 '>
-       <ButtonAddToCart id={id} />
-    {/* <Button variant='outline' size='lg' className='h-10 w-10'>
-      <CiHeart/>
-    </Button> */}
-   </div>
-   {/* ========== features ========== */}
-   <div className='grid grid-cols-1 mg:grid-cols-3 gap-3 pt-6 border-t'>
-    <div className='flex items-center gap-3'>
-      {/* <Truck className='h-5 w-5 text-primary'/> */}
-      <div>
-        <p className='font-medium text-sm'>free Shopping</p>
-        <p className='text-muted-foreground text-xs'>on orders over $50</p>
-      </div>
+    <div className='w-full px-3 sm:px-4 py-6 sm:py-8'>
+      <div className='max-w-7xl mx-auto'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8'>
+          
+          {/* Images Section */}
+          <div className='space-y-4'>
+            <div className='relative aspect-square overflow-hidden rounded-lg border bg-white'>
+              <Image 
+                width={600} 
+                height={600} 
+                src={data.data.imageCover}
+                alt={data.data.title}
+                className='w-full h-full object-contain p-4' 
+              />
+            </div>
+            
+            {/* Thumbnail Images */}
+            <Buttonproductimage images={data.data.images} title={data.data.title} />
+          </div>
 
-    </div>
-   </div>
-    </div>
-    </div>
+          {/* Product Info Section */}
+          <div className='space-y-4 sm:space-y-6'>
+            
+            {/* Brand */}
+            <div className='text-xs sm:text-sm text-gray-600 uppercase tracking-wide font-semibold'>
+              <Link href='' className='hover:text-red-600 transition-colors'>
+                {data.data.brand.name}
+              </Link>
+            </div>
+
+            {/* Title */}
+            <h1 className='text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900'>
+              {data.data.title}
+            </h1>
+
+            {/* Rating */}
+            <div className='flex items-center gap-3 flex-wrap'>
+              <div className='flex items-center gap-1 text-yellow-400'>
+                <span className='flex gap-1 text-lg sm:text-xl'>
+                  <IoStarSharp />
+                  <IoStarSharp />
+                  <IoStarSharp />
+                  <IoStarSharp />
+                  <IoStarSharp />
+                </span>
+              </div>
+              <p className='text-xs sm:text-sm text-gray-600'>
+                <span className='font-bold text-gray-900'>{data.data.ratingsAverage}</span>
+                <span className='ml-1'>({data.data.ratingsQuantity} reviews)</span>
+              </p>
+              <p className='text-xs sm:text-sm text-gray-600'>
+                <span className='font-semibold'>{data.data.sold}</span> sold
+              </p>
+            </div>
+
+            {/* Price */}
+            <div className='flex items-baseline gap-2'>
+              <span className='text-3xl sm:text-4xl font-bold text-red-600'>
+                {data.data.price} EGP
+              </span>
+            </div>
+
+            {/* Stock Status */}
+            <div className='flex items-center gap-2 text-sm sm:text-base'>
+              <span className='font-semibold text-gray-700'>Stock:</span>
+              <span className={`px-3 py-1 rounded-full font-semibold ${data.data.quantity > 0 ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
+                {data.data.quantity > 0 ? `${data.data.quantity} available` : "Out of Stock"}
+              </span>
+            </div>
+
+            {/* Description */}
+            <div className='space-y-2 border-t pt-4'>
+              <h3 className='font-semibold text-gray-900 text-sm sm:text-base'>Description</h3>
+              <p className='text-gray-600 leading-relaxed text-sm sm:text-base'>
+                {data.data.description}
+              </p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className='flex gap-3 pt-4'>
+              <ButtonAddToCart id={id} />
+            </div>
+
+            {/* Features */}
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-3 pt-4 border-t'>
+              <div className='flex items-center gap-3 p-3 bg-blue-50 rounded-lg'>
+                <div>
+                  <p className='font-medium text-sm text-gray-900'>Free Shipping</p>
+                  <p className='text-gray-600 text-xs'>on orders over 500 EGP</p>
+                </div>
+              </div>
+              <div className='flex items-center gap-3 p-3 bg-green-50 rounded-lg'>
+                <div>
+                  <p className='font-medium text-sm text-gray-900'>Secure Payment</p>
+                  <p className='text-gray-600 text-xs'>100% secure transactions</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
